@@ -10,23 +10,19 @@
 </head>
 <body>
     <div class="chat-container">
-        <div class="user-chat-box">
-            <img src="Images/user.png" alt="" id="userimage" width="50" height="60">
-            <div class="user-chat-area">
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptates, id officiis? Odit ea quisquam, fugit, consectetur debitis ad deserunt ipsam culpa suscipit eius harum aspernatur fuga fugiat dolore ut officia!
-            </div>
-        </div>
+    
         <div class="ai-chat-box">
-            <img src="Images/ai bot.jpeg" alt="" id="aiimage" width="50" height="60">
+            <img src="Images/ai bot.jpeg" alt="" id="aiimage" width="10%">
             <div class="ai-chat-area">
-                <!-- Lorem ipsum dolor sit amet consectetur adipisicing elit. Iste esse quia ullam recusandae eos autem magni quas vero itaque aut. Numquam ipsum saepe veniam possimus. Deserunt expedita vitae aperiam quam! -->
-                <img src="Images/loading.gif" alt="" class="load" width="50" color="yellow">
+                <p>Hello buddy! How can I assist you today?</p>
             </div>
         </div>
     </div>
     <div class="prompt-area">
         <input type="text" id="prompt" placeholder="Message">
-        <button id="image"><img src="Images/image.svg" alt=""></button>
+        <button id="image"><img src="Images/img.svg" alt="">
+            <input type="file" accept="images/*" hidden>
+        </button>
         <button id="submit"><img src="Images/submit.svg" alt=""></button>
     </div>
 

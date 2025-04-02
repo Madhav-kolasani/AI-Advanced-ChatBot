@@ -1,108 +1,458 @@
-*{
+* {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    font-family: cursive;
-    /* background-color: #00916e; */
+    font-family: 'Poppins', sans-serif; /* Changed from cursive to a more modern font */
+}
 
+:root {
+    --primary-color: #6366f1; /* Indigo */
+    --secondary-color: #8b5cf6; /* Purple */
+    --user-bubble: #ecfdf5; /* Light mint green */
+    --user-text: #047857; /* Dark green */
+    --ai-bubble: #ede9fe; /* Light purple */
+    --ai-text: #5b21b6; /* Dark purple */
+    --input-bg: #f3f4f6; /* Light gray */
+    --shadow-color: rgba(99, 102, 241, 0.4);
 }
-body{
-    width: 100;
+
+body {
+    width: 100%;
     height: 100vh;
+    overflow: hidden;
+    background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+    transition: background 0.5s ease;
 }
-.chat-container{
+
+.chat-container {
     width: 100%;
     height: 80%;
     padding: 20px;
     display: flex;
     flex-direction: column;
     gap: 20px;
+    overflow: auto;
+    scroll-behavior: smooth;
 }
 
-.user-chat-box{
-    width: 60%;
-    position: relative;
-    left: 40%;
-}
-.ai-chat-box{
-    width: 60%;
-    position: relative;
+/* Improved scrollbar for the chat container */
+.chat-container::-webkit-scrollbar {
+    width: 8px;
 }
 
-.user-chat-area{
+.chat-container::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+.chat-container::-webkit-scrollbar-thumb {
+    background-color: var(--shadow-color);
+    border-radius: 20px;
+}
+
+.user-chat-box {
+    width: 70%;
+    position: relative;
+    left: 30%;
+    margin-bottom: 15px;
+    animation: slideInRight 0.5s ease forwards;
+}
+
+.ai-chat-box {
+    width: 70%;
+    position: relative;
+    margin-bottom: 15px;
+    animation: slideInLeft 0.5s ease forwards;
+}
+
+@keyframes slideInRight {
+    from {
+        opacity: 0;
+        transform: translateX(50px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+@keyframes slideInLeft {
+    from {
+        opacity: 0;
+        transform: translateX(-50px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+.user-chat-area {
     width: 90%;
     padding: 20px;
-    background-color: bisque;
-    color: red;
-    border-radius: 40px 0px 40px 40px;
-    box-shadow: 2px 2px 10px red;
+    background-color: var(--user-bubble);
+    color: var(--user-text);
+    border-radius: 25px 25px 5px 25px;
+    box-shadow: 0 4px 20px var(--shadow-color);
+    display: flex;
+    gap: 10px;
+    flex-direction: column;
+    word-wrap: break-word;
+    transition: all 0.3s ease;
 }
 
-.ai-chat-area{
+.user-chat-area:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 25px var(--shadow-color);
+}
+
+.chooseimg {
+    width: 30%;
+    max-width: 250px;
+    border-radius: 15px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease;
+}
+
+.chooseimg:hover {
+    transform: scale(1.05);
+}
+
+.ai-chat-area {
     width: 90%;
     padding: 20px;
-    background-color: #ffcf00;
+    background-color: var(--ai-bubble);
     position: relative;
     left: 10%;
-    color: blue;
-    border-radius: 0px 40px 40px 40px;
-    box-shadow: 2px 2px 10px red;
+    color: var(--ai-text);
+    border-radius: 25px 25px 25px 5px;
+    box-shadow: 0 4px 20px var(--shadow-color);
+    word-wrap: break-word;
+    transition: all 0.3s ease;
 }
 
-#userimage{
+.ai-chat-area:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 25px var(--shadow-color);
+}
+
+#userimage, #aiimage {
     position: absolute;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%; /* Making images round */
+    object-fit: cover;
+    border: 3px solid white;
+    box-shadow: 0 4px 15px var(--shadow-color);
+    transition: transform 0.3s ease;
+}
+
+#userimage {
     right: 0;
-    filter: drop-shadow(2px 2px 10px red);
+    bottom: 0;
+    transform: translateY(25%);
 }
 
-#aiimage{
-    position: absolute;
+#aiimage {
     left: 0;
-    filter: drop-shadow(2px 2px 10px red);
+    bottom: 0;
+    transform: translateY(25%);
 }
 
-.prompt-area{
+#userimage:hover, #aiimage:hover {
+    transform: translateY(25%) scale(1.1);
+}
+
+.prompt-area {
     width: 100%;
     height: 20%;
     display: flex;
     align-items: center;
     justify-content: center;
     gap: 20px;
+    padding: 10px;
+    background: rgba(255, 255, 255, 0.5);
+    backdrop-filter: blur(10px);
+    border-top: 1px solid rgba(255, 255, 255, 0.5);
 }
 
-.prompt-area input{
-    width: 50%;
+.prompt-area input {
+    width: 70%;
+    max-width: 800px;
     height: 65px;
-    background-color: rgb(146, 215, 34);
+    background-color: var(--input-bg);
     outline: none;
     border: none;
     border-radius: 50px;
-    padding: 20px;
-    color: red;
-    font-size: 20px;
-    box-shadow: 2px 2px 10px red
+    padding: 20px 30px;
+    color: #333;
+    font-size: 18px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease;
 }
 
-.prompt-area button{
-    width: 70px;
+.prompt-area input:focus {
+    box-shadow: 0 4px 20px var(--shadow-color);
+    transform: translateY(-2px);
+}
+
+.prompt-area button {
+    width: 65px;
     height: 65px;
-    border-radius:50%;
-    background-color: rgb(146, 215, 34);
+    border-radius: 50%;
+    background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
     border: none;
-    box-shadow: 2px 2px 10px red;
-    cursor:pointer;
-    transition: all 0.4s;
-}
-.prompt-area button:hover{
-    background-color: yellow;
+    box-shadow: 0 4px 15px var(--shadow-color);
+    cursor: pointer;
+    transition: all 0.3s;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
+.prompt-area button:hover {
+    transform: scale(1.1) rotate(5deg);
+    box-shadow: 0 6px 20px var(--shadow-color);
+}
 
-/* edited my me */
-.chat-container img{
+.prompt-area button:active {
+    transform: scale(0.95);
+}
+
+.load {
+    filter: drop-shadow(0 4px 10px var(--shadow-color));
+}
+
+.choose {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 3px solid white;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+    transition: transform 0.3s ease;
+}
+
+.choose:hover {
+    transform: scale(1.1);
+}
+
+#image {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* Typing animation for AI response */
+.typing-indicator {
+    display: flex;
+    gap: 5px;
+    padding: 10px 15px;
+    background: var(--ai-bubble);
+    border-radius: 20px;
+    width: fit-content;
+    margin-bottom: 15px;
+    animation: fadeIn 0.5s ease;
+}
+
+.typing-indicator span {
+    width: 8px;
+    height: 8px;
+    background: var(--ai-text);
     border-radius: 50%;
 }
 
-.prompt-area img{
-    width: 30px;
+.typing-indicator span:nth-child(1) {
+    animation: bounce 1s infinite 0.1s;
+}
+
+.typing-indicator span:nth-child(2) {
+    animation: bounce 1s infinite 0.3s;
+}
+
+.typing-indicator span:nth-child(3) {
+    animation: bounce 1s infinite 0.5s;
+}
+
+@keyframes bounce {
+    0%, 100% {
+        transform: translateY(0);
+    }
+    50% {
+        transform: translateY(-5px);
+    }
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+/* Message send animation */
+@keyframes sendMessage {
+    0% {
+        opacity: 0;
+        transform: scale(0.5) translateY(50px);
+    }
+    70% {
+        transform: scale(1.05) translateY(-10px);
+    }
+    100% {
+        opacity: 1;
+        transform: scale(1) translateY(0);
+    }
+}
+
+.sending {
+    animation: sendMessage 0.5s ease forwards;
+}
+
+/* Time stamp styling */
+.timestamp {
+    font-size: 12px;
+    opacity: 0.7;
+    align-self: flex-end;
+    margin-top: 5px;
+}
+
+/* Media Queries - Kept and enhanced from original */
+/* Large Desktop (1440px and up) */
+@media (min-width: 1440px) {
+    .user-chat-box, .ai-chat-box {
+        width: 60%;
+    }
+    .user-chat-box {
+        left: 40%;
+    }
+    .prompt-area input {
+        width: 50%;
+    }
+}
+
+/* Standard Desktop/Laptop (1024px to 1439px) */
+@media (min-width: 1024px) and (max-width: 1439px) {
+    .user-chat-box, .ai-chat-box {
+        width: 65%;
+    }
+    .user-chat-box {
+        left: 35%;
+    }
+    .prompt-area input {
+        width: 60%; 
+    }
+}
+
+/* Tablet Landscape (768px to 1023px) */
+@media (min-width: 768px) and (max-width: 1023px) {
+    .user-chat-box, .ai-chat-box {
+        width: 70%;
+    }
+    .user-chat-box {
+        left: 30%;
+    }
+    .prompt-area input {
+        width: 65%;
+    }
+}
+
+/* Tablet Portrait (481px to 767px) */
+@media (min-width: 481px) and (max-width: 767px) {
+    .user-chat-box, .ai-chat-box {
+        width: 80%;
+    }
+    .user-chat-box {
+        left: 20%;
+    }
+    .user-chat-area, .ai-chat-area {
+        width: 85%;
+        padding: 15px;
+    }
+    .prompt-area {
+        gap: 10px;
+    }
+    .prompt-area input {
+        width: 70%;
+        height: 55px;
+        font-size: 16px;
+    }
+    .prompt-area button {
+        width: 55px;
+        height: 55px;
+    }
+    #userimage, #aiimage {
+        width: 40px;
+        height: 40px;
+    }
+}
+
+/* Mobile Landscape (480px and below) */
+@media (max-width: 480px) {
+    .chat-container {
+        padding: 15px 10px;
+    }
+    .user-chat-box, .ai-chat-box {
+        width: 90%;
+    }
+    .user-chat-box {
+        left: 10%;
+    }
+    .user-chat-area, .ai-chat-area {
+        width: 90%;
+        padding: 12px;
+        font-size: 14px;
+    }
+    .chooseimg {
+        width: 100%;
+        max-width: 200px;
+    }
+    .prompt-area {
+        gap: 8px;
+        padding: 5px;
+    }
+    .prompt-area input {
+        width: 75%;
+        height: 50px;
+        font-size: 14px;
+        padding: 15px;
+    }
+    .prompt-area button {
+        width: 50px;
+        height: 50px;
+    }
+    #userimage, #aiimage {
+        width: 35px;
+        height: 35px;
+    }
+    .choose {
+        width: 45px;
+        height: 45px;
+    }
+}
+
+/* Small Mobile (320px and below) */
+@media (max-width: 320px) {
+    .user-chat-box, .ai-chat-box {
+        width: 95%;
+    }
+    .user-chat-box {
+        left: 5%;
+    }
+    .user-chat-area, .ai-chat-area {
+        width: 95%;
+        padding: 10px;
+        font-size: 13px;
+    }
+    .prompt-area input {
+        width: 80%;
+        height: 45px;
+        font-size: 13px;
+        padding: 10px 15px;
+    }
+    .prompt-area button {
+        width: 45px;
+        height: 45px;
+    }
 }
