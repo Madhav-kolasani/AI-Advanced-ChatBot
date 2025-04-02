@@ -26,8 +26,9 @@ body {
 
 .chat-container {
     width: 100%;
-    height: 80%;
+    height: calc(100vh - 120px);
     padding: 20px;
+    padding-bottom: 80px;
     display: flex;
     flex-direction: column;
     gap: 20px;
@@ -63,6 +64,7 @@ body {
     margin-bottom: 15px;
     animation: slideInLeft 0.5s ease forwards;
 }
+
 
 @keyframes slideInRight {
     from {
@@ -100,6 +102,19 @@ body {
     transition: all 0.3s ease;
 }
 
+.ai-chat-area {
+    width: 90%;
+    padding: 20px;
+    background-color: var(--ai-bubble);
+    position: relative;
+    left: 10%;
+    color: var(--ai-text);
+    border-radius: 25px 25px 25px 5px;
+    box-shadow: 0 4px 20px var(--shadow-color);
+    word-wrap: break-word;
+    transition: all 0.3s ease;
+}
+
 .user-chat-area:hover {
     transform: translateY(-5px);
     box-shadow: 0 8px 25px var(--shadow-color);
@@ -117,18 +132,6 @@ body {
     transform: scale(1.05);
 }
 
-.ai-chat-area {
-    width: 90%;
-    padding: 20px;
-    background-color: var(--ai-bubble);
-    position: relative;
-    left: 10%;
-    color: var(--ai-text);
-    border-radius: 25px 25px 25px 5px;
-    box-shadow: 0 4px 20px var(--shadow-color);
-    word-wrap: break-word;
-    transition: all 0.3s ease;
-}
 
 .ai-chat-area:hover {
     transform: translateY(-5px);
