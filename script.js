@@ -89,9 +89,14 @@ function handleChatResponse(userMessage) {
     chatContainer.scrollTo({top: chatContainer.scrollHeight, behavior: "smooth"});
     
     setTimeout(() => {
+        // Using CSS-based loading animation instead of loading.gif
         let html = `<img src="Images/ai bot.jpeg" alt="" id="aiimage" width="10%">
             <div class="ai-chat-area">
-               <img src="Images/loading.gif" alt="" class="load" width="50">
+               <div class="loading-animation">
+                   <div class="loading-dot"></div>
+                   <div class="loading-dot"></div>
+                   <div class="loading-dot"></div>
+               </div>
             </div>`
         let aiChatBox = createChatBox(html, "ai-chat-box");
         chatContainer.appendChild(aiChatBox);

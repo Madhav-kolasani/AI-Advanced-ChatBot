@@ -162,19 +162,56 @@ body {
     transform: translateY(25%) scale(1.1);
 }
 
+/* Loading animation */
+.loading-animation {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 8px;
+}
+
+.loading-dot {
+    width: 10px;
+    height: 10px;
+    background-color: var(--ai-text);
+    border-radius: 50%;
+    filter: drop-shadow(0 4px 10px var(--shadow-color));
+}
+
+.loading-dot:nth-child(1) {
+    animation: bounce 1s infinite 0.1s;
+}
+
+.loading-dot:nth-child(2) {
+    animation: bounce 1s infinite 0.3s;
+}
+
+.loading-dot:nth-child(3) {
+    animation: bounce 1s infinite 0.5s;
+}
+
 .prompt-area {
-    width: 100%;
-    height: 20%;
+    width: 90%;
+    max-width: 1200px;
+    height: auto;
+    margin: 0 auto 20px;
     display: flex;
     align-items: center;
     justify-content: center;
-    gap: 20px;
-    padding: 10px;
-    background: rgba(255, 255, 255, 0.5);
+    gap: 15px;
+    padding: 15px 20px;
+    background: rgba(255, 255, 255, 0.6);
     backdrop-filter: blur(10px);
-    border-top: 1px solid rgba(255, 255, 255, 0.5);
+    border-radius: 30px;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.8);
+    transition: all 0.3s ease;
 }
 
+.prompt-area:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 12px 25px var(--shadow-color);
+}
 .prompt-area input {
     width: 70%;
     max-width: 800px;
