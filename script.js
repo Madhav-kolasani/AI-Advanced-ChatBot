@@ -58,7 +58,6 @@ async function generateResponse(aiChatBox) {
         chatContainer.scrollTo({ top: chatContainer.scrollHeight, behavior: "smooth" });
         image.src = `Images/img.svg`; 
         image.classList.remove("choose");
-        // Reset to null instead of empty object
         user.file = null;
     }
 }
@@ -126,7 +125,6 @@ imageInput.addEventListener("change", () => {
     let reader = new FileReader();
     reader.onload = (e) => {
         let base64string = e.target.result.split(",")[1];
-        // Create a complete file object
         user.file = {
             mime_type: file.type,
             data: base64string,
